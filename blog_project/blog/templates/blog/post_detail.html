@@ -1,0 +1,27 @@
+{% extends 'blog/home.html' %}
+
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p>Автор: {{ post.author }}</p>
+<p>Категория: {{ post.category.name }}</p>
+
+<h3>Комментарии: </h3>
+{% for comment in comments %}
+    <p><b>{{ comment.author }}</b>: {{ comment.content }}</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Добавить комментарий</button>
+    </form>
+{% else %}
+<p><a href="{url 'login'}">Войдите</a>, что бы оставить комментарий</p>
+{% endif %}
+
+<a href="{% url 'post_list' %}">Назад</a>
+
+{% endblock content %}

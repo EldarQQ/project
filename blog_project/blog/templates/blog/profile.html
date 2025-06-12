@@ -1,0 +1,16 @@
+{% extends 'blog/home.html' %}
+
+{% block content %}
+
+    <h2>проифль пользователя {{ user.username }}</h2>
+
+    <img src="{{ user.profile.avatar.url }}" width="150"><br><br>
+
+    <p>Email: {{ user.email }}</p>
+
+    <a href="{% url 'upload_avatar' %}">Изменить аватар</a>
+
+
+    <a href="{% url 'post_list' %}">К списку постов</a>
+
+{% endblock content %}
