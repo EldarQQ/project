@@ -7,11 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-elgjfc!m&y+gvb*m$l7u^jk3e&ff^&yo3l-_ew**d)tpfa4shc'
+import os
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-key')
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -66,16 +66,16 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
-        "ENGINE": 'django.db.backends.postgresql', 
-        "NAME": "blog_project",
-        "USER": "postgres",
-        "PASSWORD": '76720052',
-        "HOST": 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
